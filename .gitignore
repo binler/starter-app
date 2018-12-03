@@ -26,4 +26,4 @@ $RECYCLE.BIN/
 .Trashes
 
 # Nextjs
-.next
+client/.next
