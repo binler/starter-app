@@ -1,0 +1,29 @@
+# Compiled files
+dist/
+uploads/
+# Config file
+config/config.js
+
+# Node stuff
+node_modules
+.npm
+.node_repl_history
+.lock-wscript
+logs
+*.log
+npm-debug.log*
+package-lock.json
+.vscode
+
+# OS stuff
+Desktop.ini
+ehthumbs.db
+Thumbs.db
+$RECYCLE.BIN/
+._*
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# Nextjs
+.next
