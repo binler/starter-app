@@ -1,8 +1,9 @@
 # Compiled files
 dist/
+.env
 uploads/
 # Config file
-config/config.js
+server/config/config.json
 
 # Node stuff
 node_modules
