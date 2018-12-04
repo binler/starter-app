@@ -1,10 +1,9 @@
+const TestController = require('../controllers/TestController')
 
 module.exports = (server, express) => {
     const router = express.Router();
 
-    router.get('/', (req, res) => {
-		return res.json({version: '1.0'})
-	});
+    router.get('/', TestController.index);
 
     server.use(`/${process.env.PREFIX_API}/test`, router);
 }

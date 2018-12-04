@@ -7,6 +7,7 @@ const fs = require('fs')
 const path = require('path')
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
+const cookieParser = require('cookie-parser')
 const port = parseInt(process.env.PORT, 10) || 3000
 const env = process.env.NODE_ENV
 const dev = env !== 'production'
@@ -34,22 +35,18 @@ app
     // Default catch-all handler to allow Next.js to handle all other routes
     server.use(handler)
 
-    server.listen(port, err => {
-      if (err) {
-        throw err
-      }
-      console.log(`> Ready on port ${port} [${env}]`)
-    })
-
     models.sequelize.sync().then(function() {
-        server.listen(port, err => {
-          if (err) {
-            throw err
-          }
-          console.log(`> Ready on port ${port} [${env}]`)
-        })
+        server.listen(port, function() {
+            console.log(`> Ready on port ${port} [${env}]`)
+        });
         server.on('error', onError);
-        server.on('listening', onListening);
+        server.on('listening', function() {
+            var addr = server.address();
+            var bind = typeof addr === 'string'
+              ? 'pipe ' + addr
+              : 'port ' + addr.port;
+            console.log('Listening on ' + bind);
+        });
     });
 
 })
@@ -84,16 +81,4 @@ function onError(error) {
     default:
       throw error;
   }
-}
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
 }

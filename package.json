@@ -2,15 +2,14 @@
   "name": "starter-app",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.3",
-    "debug": "^4.1.0",
     "dotenv": "^6.1.0",
     "express": "^4.15.3",
     "express-session": "^1.15.6",
     "helmet": "^3.15.0",
-    "morgan": "^1.9.1",
     "mysql2": "^1.6.4",
     "next": "7.0.2",
     "next-routes": "^1.4.2",
@@ -25,7 +24,7 @@
     "http-proxy-middleware": "^0.17.4"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development PORT=3000 nodemon server/index.js",
+    "dev": "cross-env nodemon server/index.js",
     "build": "next build",
     "prod": "cross-env NODE_ENV=production PORT=3000 node server.js"
   }
