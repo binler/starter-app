@@ -1,5 +1,9 @@
+const models = require('../models');
+
 module.exports = {
     index: (req, res, next) => {
-        return res.json({'name' : 'Test controller'})
+        models.Test.findAll().then(tests => {
+            return res.json({test: tests});
+        })        
     }
 }
