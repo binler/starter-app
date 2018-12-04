@@ -1,11 +1,18 @@
 /* eslint-disable no-console */
 const express = require('express')
 const next = require('next')
-
+// Add contents config
+const config = require('../config/config');
+// Add config
+require('dotenv').config()
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const index = require('./routes/index');
 const devProxy = {
   '/api': {
-    target: 'http://localhost:3000',
-    changeOrigin: true
+	target: 'http://localhost:3000',
+	changeOrigin: true
   }
 }
 
@@ -17,40 +24,39 @@ const app = next({
   dir: './client', // base directory where everything is, could move to src later
   dev
 })
-
 // const handle = app.getRequestHandler()
-
 const handler = routes.getRequestHandler(app)
+// Express
+const server = express();
 
-let server
-app
-  .prepare()
-  .then(() => {
-    server = express()
+server.use(logger('dev'));
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({
+  extended: false
+}));
+server.use(cookieParser());
+server.use('/', index);
 
-    //Set up the proxy.
-    // if (dev && devProxy) {
-    //   const proxyMiddleware = require('http-proxy-middleware')
-    //   Object.keys(devProxy).forEach(function (context) {
-    //     server.use(proxyMiddleware(context, devProxy[context]))
-    //   })
-    // }
+// catch 404 and forward to error handler
+server.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 
-    server.get('/api/todo', (req, res) => {
-        return res.json({id: 'binh'});
-    })
+// error handler
+server.use(function(err, req, res, next) {
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // Default catch-all handler to allow Next.js to handle all other routes
-    server.use(handler)
+	// render the error page
+	res.status(err.status || 500);
+	res.render('error');
+});
 
-    server.listen(port, err => {
-      if (err) {
-        throw err
-      }
-      console.log(`> Ready on port ${port} [${env}]`)
-    })
-  })
-  .catch(err => {
-    console.log('An error occurred, unable to start the server')
-    console.log(err)
-  })
+if (!module.parent) {
+	server.listen(config.port, function() {
+	console.log(`app is listening at http://localhost:${config.port}`);
+	});
+}

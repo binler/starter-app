@@ -1,12 +1,18 @@
 {
-  "name": "Starterapp",
+  "name": "starter-app",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
     "next": "7.0.2",
     "next-routes": "^1.4.2",
+    "nodemon": "^1.18.7",
     "react": "16.2.0",
-    "react-dom": "16.2.0"
+    "react-dom": "16.2.0",
+    "sequelize": "^4.41.2"
   },
   "devDependencies": {
     "cross-env": "^5.0.1",
