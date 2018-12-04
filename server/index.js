@@ -7,8 +7,6 @@ const fs = require('fs')
 const path = require('path')
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
-const cookieParser = require('cookie-parser')
-
 const port = parseInt(process.env.PORT, 10) || 3000
 const env = process.env.NODE_ENV
 const dev = env !== 'production'
