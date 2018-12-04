@@ -2,7 +2,13 @@
   "name": "Starterapp",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.1.0",
     "express": "^4.15.3",
+    "express-session": "^1.15.6",
+    "helmet": "^3.15.0",
     "next": "7.0.2",
     "next-routes": "^1.4.2",
     "react": "16.2.0",

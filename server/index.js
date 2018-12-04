@@ -1,24 +1,20 @@
 /* eslint-disable no-console */
+require('dotenv').config()
 const express = require('express')
 const next = require('next')
+const fs = require('fs')
+const path = require('path')
 
-const devProxy = {
-  '/api': {
-    target: 'http://localhost:3000',
-    changeOrigin: true
-  }
-}
+const bodyParser = require('body-parser')
+const helmet = require('helmet')
+const cookieParser = require('cookie-parser')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const env = process.env.NODE_ENV
 const dev = env !== 'production'
 const routes = require('../client/routes')
-const app = next({
-  dir: './client', // base directory where everything is, could move to src later
-  dev
-})
-
-// const handle = app.getRequestHandler()
+const routesApi = require('./routes')
+const app = next({dir: './client', dev})
 
 const handler = routes.getRequestHandler(app)
 
@@ -27,18 +23,13 @@ app
   .prepare()
   .then(() => {
     server = express()
+    server.use(helmet())
+    server.use(bodyParser.json())
+    server.use(bodyParser.urlencoded({ extended: false }))
+    server.use(cookieParser())
+    server.disable('x-powered-by')
 
-    //Set up the proxy.
-    // if (dev && devProxy) {
-    //   const proxyMiddleware = require('http-proxy-middleware')
-    //   Object.keys(devProxy).forEach(function (context) {
-    //     server.use(proxyMiddleware(context, devProxy[context]))
-    //   })
-    // }
-
-    server.get('/api/todo', (req, res) => {
-        return res.json({id: 'binh'});
-    })
+    require('./routes')(server, express)
 
     // Default catch-all handler to allow Next.js to handle all other routes
     server.use(handler)
