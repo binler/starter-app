@@ -2,6 +2,7 @@
   "name": "starter-app",
   "license": "ISC",
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
@@ -9,6 +10,7 @@
     "dotenv": "^6.1.0",
     "express": "^4.15.3",
     "express-session": "^1.15.6",
+    "file-loader": "^2.0.0",
     "helmet": "^3.15.0",
     "mysql2": "^1.6.4",
     "next": "7.0.2",
@@ -16,8 +18,11 @@
     "nodemon": "^1.18.7",
     "react": "16.2.0",
     "react-dom": "16.2.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.83.0",
     "sequelize": "^4.41.2",
-    "sequelize-cli": "^5.4.0"
+    "sequelize-cli": "^5.4.0",
+    "url-loader": "^1.1.2"
   },
   "devDependencies": {
     "cross-env": "^5.0.1",
