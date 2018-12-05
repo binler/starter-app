@@ -10,6 +10,8 @@ yarn
 yarn dev
 ```
 
+đổi file config.example thành config.json để connect database
+
 ## Cách tạo Model, Migration, Seed
 Trước khi tạo phải cài đặt sequelize-cli
 ```bash
