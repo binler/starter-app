@@ -4,6 +4,6 @@ const routes = require('next-routes')
 
 // Name   Page      Pattern
 module.exports = routes() // ----   ----      -----
-.add('index')
-.add('about')
-.add('contact')
+.add('index', '/', 'App/index')
+.add('about', '/about', 'App/about')
+.add('contact', '/contact', 'App/contact')
