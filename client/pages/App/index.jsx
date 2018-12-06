@@ -8,9 +8,10 @@ import {
   Image,
   Segment
 } from 'semantic-ui-react'
+import Layout from '../../components/Layout/Layout';
 
 const Homepage = () => (
-  <>
+  <Layout title="Home">
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
@@ -100,7 +101,7 @@ const Homepage = () => (
         </Button>
       </Container>
     </Segment>
-  </>
+  </Layout>
 )
 
 export default Homepage
