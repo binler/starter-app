@@ -1,8 +1,7 @@
 const models = require('../models');
 module.exports = {
-    index: (req, res, next) => {
-        models.Test.findAll().then(tests => {
-            return res.json({test : tests})
-        })
+    index: async (req, res, next) => {
+        var result = await models.test.findAll();
+        return res.json({test : result})
     }
 }

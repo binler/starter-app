@@ -1,15 +1,29 @@
-import React from 'react'
-import App, { Container } from 'next/app'
-import Layout from '../components/Layout/Layout'
-import 'semantic-ui-css/semantic.min.css'
+import React from 'react';
+import App, { Container } from 'next/app';
+import { Provider } from 'react-redux';
+import withRedux from 'next-redux-wrapper';
+import 'semantic-ui-css/semantic.min.css';
+import { initStore } from '../store';
 
-export default class InitApp extends App {
-    render() {
-        const { Component, pageProps } = this.props
-        return <Container>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
-        </Container>
-    }
-}
+export default withRedux(initStore)(
+	class InitApp extends App {
+		static async getInitialProps({ Component, ctx }) {
+			return {
+				pageProps: Component.getInitialProps
+					? await Component.getInitialProps(ctx)
+					: {}
+			};
+		}
+
+		render() {
+			const { Component, pageProps, store } = this.props;
+			return (
+				<Container>
+					<Provider store={store}>
+                        <Component {...pageProps} />
+					</Provider>
+				</Container>
+			);
+		}
+	}
+);
