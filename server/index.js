@@ -15,8 +15,6 @@ const routes = require('../client/routes')
 const models = require('./models')
 const app = next({dir: './client', dev})
 
-const routesApi = require('./routes')
-
 const handler = routes.getRequestHandler(app)
 
 let server
@@ -32,13 +30,13 @@ app
     server.disable('x-powered-by')
 
     require('./routes')(server, express)
-    // Default catch-all handler to allow Next.js to handle all other routes
-    server.use(handler)
 
     models.sequelize.sync().then(function() {
-        server.listen(port, function() {
-            console.log(`> Ready on port ${port} [${env}]`)
-        });
+        // Default catch-all handler to allow Next.js to handle all other routes
+        server.use(handler).listen(port)
+        // server.listen(port, function() {
+        //     console.log(`> Ready on port ${port} [${env}]`)
+        // });
         server.on('error', onError);
         server.on('listening', function() {
             var addr = server.address();
