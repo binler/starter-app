@@ -1,11 +1,10 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 import { Provider } from 'react-redux';
-import withRedux from 'next-redux-wrapper';
+import withReduxStore from '../with-redux-store';
 import 'semantic-ui-css/semantic.min.css';
-import { initStore } from '../store';
-
-export default withRedux(initStore)(
+import withNProgress from "next-nprogress";
+export default withNProgress()(withReduxStore(
 	class InitApp extends App {
 		static async getInitialProps({ Component, ctx }) {
 			return {
@@ -15,15 +14,21 @@ export default withRedux(initStore)(
 			};
 		}
 
+		componentDidCatch (error, errorInfo) {
+			console.log('CUSTOM ERROR HANDLING', error)
+			// This is needed to render errors correctly in development / production
+			super.componentDidCatch(error, errorInfo)
+		}
+
 		render() {
-			const { Component, pageProps, store } = this.props;
+			const { Component, pageProps, reduxStore } = this.props;
 			return (
 				<Container>
-					<Provider store={store}>
+					<Provider store={reduxStore}>
                         <Component {...pageProps} />
 					</Provider>
 				</Container>
 			);
 		}
 	}
-);
+));

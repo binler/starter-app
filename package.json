@@ -15,14 +15,15 @@
     "helmet": "^3.15.0",
     "mysql2": "^1.6.4",
     "next": "7.0.2",
+    "next-nprogress": "^1.4.0",
     "next-redux-wrapper": "^2.1.0",
     "next-routes": "^1.4.2",
     "nodemon": "^1.18.7",
     "rc-form": "^2.2.7",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-redux": "^6.0.0",
-    "redux": "^4.0.1",
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.7",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
@@ -39,7 +40,7 @@
   },
   "scripts": {
     "dev": "cross-env nodemon server/index.js",
-    "build": "next build",
-    "prod": "cross-env NODE_ENV=production PORT=3000 node server.js"
+    "build": "next build client",
+    "prod": "cross-env NODE_ENV=production PORT=3000 node server/index.js"
   }
 }
