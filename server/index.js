@@ -34,9 +34,6 @@ app
     models.sequelize.sync().then(function() {
         // Default catch-all handler to allow Next.js to handle all other routes
         server.use(handler).listen(port)
-        // server.listen(port, function() {
-        //     console.log(`> Ready on port ${port} [${env}]`)
-        // });
         server.on('error', onError);
         server.on('listening', function() {
             var addr = server.address();
