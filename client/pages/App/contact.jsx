@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 
 class Contact extends Component {
 	render() {
-		console.log(this.props);
 		const { handleSubmit, values, handleChange } = this.props;
 		return (
 			<Layout title="Contact">

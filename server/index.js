@@ -25,7 +25,7 @@ app
 
     server.use(helmet())
     server.use(bodyParser.json())
-    server.use(bodyParser.urlencoded({ extended: false }))
+    server.use(bodyParser.urlencoded({ extended: true }))
     server.use(cookieParser())
     server.disable('x-powered-by')
 
