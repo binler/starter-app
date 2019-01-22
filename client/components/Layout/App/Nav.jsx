@@ -1,5 +1,5 @@
 import { Link } from '../../../routes';
-import { Container, Image, Menu } from 'semantic-ui-react';
+import { Container, Image, Menu, Button } from 'semantic-ui-react';
 export default () => (
 	<Menu fixed="top" inverted>
 		<Container>
@@ -25,6 +25,18 @@ export default () => (
 				<Link route="contact">
 					<a>Contact</a>
 				</Link>
+			</Menu.Item>
+			<Menu.Item position="right">
+				<Button as="a" inverted={true}>
+					Log in
+				</Button>
+				<Button
+					as="a"
+					inverted={true}
+					style={{ marginLeft: '0.5em' }}
+				>
+					Sign Up
+				</Button>
 			</Menu.Item>
 		</Container>
 	</Menu>
